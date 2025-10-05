@@ -11,25 +11,19 @@
 
   gtag('config', 'G-YKM9XW63Z4');
 </script>
-
- <!-- OUTRO CODIGO DE CONVERSAO HOTMART  -->
-  <script>
-  function gtag_report_conversion(url) {
-    var callback = function () {
-      if (typeof(url) != 'undefined') {
-        window.location = url;
-      }
-    };
-    gtag('event', 'conversion', {
-        'send_to': 'AW-11357430773/lqa4CLyz_qMbEPXH0qcq',
-        'value': 1.0,
-        'currency': 'BRL',
-        'transaction_id': '',
-        'event_callback': callback
-    });
-    return false;
-  }
+	<!-- TikTok Pixel Code Start -->
+<script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D3HCDS3C77UCFFQTHFLG');
+    ttq.page();
+  }(window, document, 'ttq');
 </script>
+<!-- TikTok Pixel Code End -->
+
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 			<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
@@ -1825,8 +1819,62 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/academiadigitaldye.com\/w
 </script>
 <script src="https://academiadigitaldye.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.31.0" id="elementor-pro-frontend-js"></script>
 <script src="https://academiadigitaldye.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.31.0" id="pro-elements-handlers-js"></script>
+  <!-- Seu conteúdo HTML (hero, botões "ACCEDER", etc.) -->
+  <button id="buy-btn" class="acceder-btn">ACCEDER</button>
+
+  <script>
+    // Função para Hash SHA-256 (para PII)
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Identificação do usuário (se coletar e-mail via Hotmart ou form)
+    (async () => {
+      const userEmail = 'exemplo@email.com'; // Substitua por e-mail real do usuário
+      if (userEmail) {
+        ttq.identify({
+          "email": await sha256(userEmail),
+          "external_id": 'user-id-123' // ID único do usuário
+        });
+      }
+    })();
+
+    // Evento ViewContent (ao carregar a página)
+    ttq.track('ViewContent', {
+      contents: [{
+        content_id: 'curso-velas-artesanales',
+        content_type: 'product',
+        content_name: 'Curso Velas Artesanales'
+      }],
+      value: 30,
+      currency: 'USD'
+    });
+
+    // Evento InitiateCheckout (clique em "ACCEDER")
+    document.addEventListener('DOMContentLoaded', function() {
+      const buyButtons = document.querySelectorAll('#buy-btn, .acceder-btn');
+      buyButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          ttq.track('InitiateCheckout', {
+            contents: [{
+              content_id: 'curso-velas-artesanales',
+              content_type: 'product',
+              content_name: 'Curso Velas Artesanales'
+            }],
+            value: 30,
+            currency: 'USD'
+          });
+        });
+      });
+    });
+  </script>
+
 	</body>
 </html>
+
 
 
 
